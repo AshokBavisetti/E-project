@@ -1,0 +1,39 @@
+
+
+.container {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.image-container {
+    flex: 1;
+}
+
+form {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#I {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#I[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#I[type="submit"]:hover {
+    background-color: #0056b3;
+}
+

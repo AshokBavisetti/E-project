@@ -3,9 +3,9 @@ import Navbar from './Comonent/Navbar/Navbar';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Login from './Comonent/Login/Login';
 import Home from './Comonent/Home/Home';
-// import Cart from './Comonent/Cart/Cart';
 import Logout from './Comonent/Logout/Logout';
 import Cart from './Comonent/Cart/Cart';
+
 
 
 function App() {
