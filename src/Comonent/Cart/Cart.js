@@ -5,7 +5,7 @@ export default function Cart() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/cart")
+    axios.get("http://localhost:3002/cart")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);

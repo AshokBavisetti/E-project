@@ -20,7 +20,7 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/posts', data)
+      .post('http://localhost:3002/posts', data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     alert('Login successfully');
