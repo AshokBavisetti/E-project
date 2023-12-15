@@ -20,8 +20,6 @@ import { useNavigate } from 'react-router-dom';
 // import IconButton from '@mui/material/IconButton';
 // import Badge from '@mui/material/Badge';
 
-
-
 export default function Navbar() {
   const [value, setValue] = useState();
   const theme = useTheme();
@@ -97,4 +95,14 @@ const UserProfile3 = () =>{
       </AppBar>
     </React.Fragment>
   )
+    // <nav>
+    //   <ul>
+    //     <Link to="/"><li>Login</li></Link>
+    //     <Link to="/Home"><li>Home</li></Link>
+    //     <Link to="/Cart"><li>Cart</li></Link>
+    //     <Link to="/Logout"><li>Logout</li></Link>
+    //   </ul>
+    // </nav>
+  // );
 }
+
