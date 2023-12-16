@@ -27,17 +27,13 @@ export default function Cart() {
       .catch((err) => console.log(err));
   }, []);
 
-  const removeProduct = (id) => {
-    // Make a DELETE request to remove the product from the cart
-    fetch(`http://localhost:3002/cart/${id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the local cart state after successful deletion
-        setData(data);
+  const handleDelete = (itemId) => {
+    axios.delete(`http://localhost:3002/cart/${itemId}`)
+      .then((res) => {
+        const updatedData = data.filter((item) => item.id !== itemId);
+        setData(updatedData);
       })
-      .catch((error) => console.error('Error removing product:', error));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -75,7 +71,7 @@ export default function Cart() {
               </Typography>
             </Grid>
             <Grid item sx={{ marginLeft: "auto" }}>
-              <Typography sx={{ cursor: 'pointer' }} variant="body2" >
+              <Typography sx={{ cursor: 'pointer' }} variant="body2" onClick={() => handleDelete(x.id)} >
                 Remove
               </Typography>
             </Grid>
