@@ -1,7 +1,24 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
+
+const Div = styled('div')({
+  margin:"100px",
+});
 
 export default function Cart() {
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -10,20 +27,71 @@ export default function Cart() {
       .catch((err) => console.log(err));
   }, []);
 
+  const removeProduct = (id) => {
+    // Make a DELETE request to remove the product from the cart
+    fetch(`http://localhost:3002/cart/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the local cart state after successful deletion
+        setData(data);
+      })
+      .catch((error) => console.error('Error removing product:', error));
+  };
+
   return (
-    <div>
-      <h1>Welcome to Cart</h1>
-      {
-        data.map((x, index) => (
-          <div key={index}>
-            <img src={x.image} height={80}  width={70}alt={x.title} />
-            <p>{x.item}</p>
-            <p>{x.title}</p>
-            <p><strong>Price:</strong> $ {x.price}</p>
-            <button>Delete</button>
-          </div>
-        ))
-      }
-    </div>
+    <Div>
+    {
+      data.map((x, index) => (
+    <Paper
+      sx={{
+        p:2,
+        margin: '8px',
+        maxWidth: 1000,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+    >
+
+      <Grid container  spacing={6} key={index} >
+        <Grid item>
+          <ButtonBase sx={{ width: 128, height: 128 }}>
+            <Img alt="complex" src={x.image} />
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="subtitle1" component="div">
+                {x.item}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {x.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {x.price}
+              </Typography>
+            </Grid>
+            <Grid item sx={{ marginLeft: "auto" }}>
+              <Typography sx={{ cursor: 'pointer' }} variant="body2" >
+                Remove
+              </Typography>
+            </Grid>
+          </Grid>
+          {/* <Grid item>
+            <Typography variant="subtitle1" component="div">
+              $19.00
+            </Typography>
+          </Grid> */}
+        </Grid>
+      </Grid>
+
+    </Paper>
+          ))
+        }
+        </Div>
+
   );
 }

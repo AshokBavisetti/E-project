@@ -1,24 +1,20 @@
-//   //  <ul>
-//   //   <Link to="/"><li>Login</li></Link>
-//   //   <Link to="/Home"><li>Home</li></Link>
-//   //   <Link to="/Cart"><li>Cart</li></Link>
-//   //   <Link to="/Logout"><li>Logout</li></Link>
-//   //  </ul>
-import React, { useState } from 'react'
-// import{Appbar, Typography,Toolbar} from '@mui/icons-material';
-import { AppBar, Toolbar, Box, Button, Container, CssBaseline, Grid, Paper, TextField, Typography, Link, GlobalStyles, useTheme, useMediaQuery,} from '@mui/material'
+import React, { useState , useEffect} from 'react'
+import { AppBar, Toolbar, Box, Button, Container, CssBaseline, Grid, Paper, TextField, Typography, Link, GlobalStyles, useTheme, useMediaQuery,Slide,useScrollTrigger} from '@mui/material'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import MenuBar from './MenuBar';
 import { useNavigate } from 'react-router-dom';
+const HideOnScroll = ({ children }) => {
+  const trigger = useScrollTrigger();
 
-
-// import AccountCircle from '@mui/icons-material/AccountCircle';
-// import MailIcon from '@mui/icons-material/Mail';
-// import NotificationsIcon from '@mui/icons-material/Notifications';
-// import IconButton from '@mui/material/IconButton';
-// import Badge from '@mui/material/Badge';
+  return (<>
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+    </>
+  );
+};
 
 export default function Navbar() {
   const [value, setValue] = useState();
@@ -39,10 +35,10 @@ const UserProfile2 = () =>{
 const UserProfile3 = () =>{
   navigate("/")
 }
-  // const Address =  {
   return (
     <React.Fragment>
-      <AppBar color='default' sx={{marginTop:2, bgcolor: "white"}}>
+      <HideOnScroll>
+      <AppBar color='default' sx={{ bgcolor: "white"}}>
         <Toolbar>
         
           <ShoppingCartCheckoutIcon sx={{ transform: "scale(2)" }}/>
@@ -93,16 +89,8 @@ const UserProfile3 = () =>{
           )}
         </Toolbar>
       </AppBar>
+      </HideOnScroll>
     </React.Fragment>
   )
-    // <nav>
-    //   <ul>
-    //     <Link to="/"><li>Login</li></Link>
-    //     <Link to="/Home"><li>Home</li></Link>
-    //     <Link to="/Cart"><li>Cart</li></Link>
-    //     <Link to="/Logout"><li>Logout</li></Link>
-    //   </ul>
-    // </nav>
-  // );
 }
 
