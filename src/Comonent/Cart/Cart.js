@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import './cart.css'; 
 
 export default function Cart() {
   const [data, setData] = useState([]);
@@ -10,20 +11,27 @@ export default function Cart() {
       .catch((err) => console.log(err));
   }, []);
 
+  const handleDelete = (itemId) => {
+    axios.delete(`http://localhost:3001/cart/${itemId}`)
+      .then((res) => {
+        const updatedData = data.filter((item) => item.id !== itemId);
+        setData(updatedData);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div>
+    <div className="product-container">
       <h1>Welcome to Cart</h1>
-      {
-        data.map((x, index) => (
-          <div key={index}>
-            <img src={x.image} height={80}  width={70}alt={x.title} />
-            <p>{x.item}</p>
-            <p>{x.title}</p>
-            <p><strong>Price:</strong> $ {x.price}</p>
-            <button>Delete</button>
-          </div>
-        ))
-      }
+      {data.map((x, index) => (
+        <div key={index} className="product-item">
+          <img src={x.image} className="product-image" alt={x.title} />
+          <p>{x.item}</p>
+          <p className="product-details">{x.title}</p>
+          <p><strong>Price:</strong> $ {x.price}</p>
+          <button onClick={() => handleDelete(x.id)}  className="add-to-cart">Delete</button>
+        </div>
+      ))}
     </div>
   );
 }
