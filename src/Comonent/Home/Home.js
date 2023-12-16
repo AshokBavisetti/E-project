@@ -22,7 +22,7 @@ const Home = () => {
 
   const addToCart = async (item) => {
     try {
-      await axios.post("http://localhost:3001/cart", item);
+      await axios.post("http://localhost:3002/cart", item);
       console.log("Item added to cart:", item);
 
      
